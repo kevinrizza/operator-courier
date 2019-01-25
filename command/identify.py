@@ -4,10 +4,8 @@ def get_operator_artifact_type(operatorArtifactString):
     operatorArtifact = yaml.load(operatorArtifactString)
     if isinstance(operatorArtifact, dict):
         if "packageName" in operatorArtifact:
-            return "packages"
+            return "Package"
         elif "kind" in operatorArtifact:
-            if operatorArtifact["kind"] == "ClusterServiceVersion": 
-                return "clusterServiceVersions"
-            elif operatorArtifact["kind"] == "CustomResourceDefinition":
-                return "customResourceDefinitions"
-    return "invalid"
+            if operatorArtifact["kind"] == "ClusterServiceVersion" or operatorArtifact["kind"] == "CustomResourceDefinition":
+                return operatorArtifact["kind"]
+    raise ValueError('Courier requires valid CSV, CRD, and Package files')
