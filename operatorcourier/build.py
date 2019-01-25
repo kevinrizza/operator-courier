@@ -1,5 +1,5 @@
 import yaml as pyYaml
-import command.identify as identify
+import operatorcourier.identify as identify
 
 class BuildCmd():
     name = 'build'
