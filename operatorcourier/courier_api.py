@@ -18,11 +18,13 @@ def build_and_verify(source_dir="", files=""):
     :param files: Comma delimited string of files to create bundle with.
     """
 
-    paths = ["tests/test_files/csv.yaml", "tests/test_files/crd.yaml", "tests/test_files/package.yaml"]
     yamls = []
-    for x in range(3):
-        with open(paths[x]) as f:
-            yamls.append(f.read())
+
+    for filename in os.listdir(source_dir):
+        if filename.endswith(".yaml"):
+            with open(source_dir + "/" + filename) as f:
+                yamls.append(f.read())
+    
 
     bundle = BuildCmd().build_bundle(yamls)
 
